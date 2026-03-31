@@ -1,27 +1,15 @@
 .arrow {
-  border: none;
-  background: transparent;
-  cursor: pointer;
   position: absolute;
   top: 40%;
+  transform: translateY(-50%);
   z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  cursor: pointer;
 }
 
-/* Left Arrow Position */
-.swiper-button-prev {
-  left: -20px;
+.left-arrow {
+  left: 0;
 }
 
-/* Right Arrow Position */
-.swiper-button-next {
-  right: -20px;
-}
-
-/* Arrow Image Size */
-.arrow img {
-  width: 32px;
-  height: 32px;
+.right-arrow {
+  right: 0;
 }

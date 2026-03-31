@@ -1,12 +1,12 @@
 import React from "react";
-import leftArrow from "../../assets/Group 3741.svg";
+import arrow from "../../assets/Group 3741.svg";
 import styles from "./Navigation.module.css";
 
 function LeftArrow() {
   return (
-    <button className={`swiper-button-prev ${styles.arrow}`}>
-      <img src={leftArrow} alt="left arrow" />
-    </button>
+    <div className={`left-arrow ${styles.arrow}`}>
+      <img src={arrow} alt="left arrow" />
+    </div>
   );
 }
 
