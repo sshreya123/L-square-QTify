@@ -1,0 +1,17 @@
+.section {
+  padding: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.button {
+  background: none;
+  border: none;
+  color: var(--color-green);
+  font-weight: 600;
+  cursor: pointer;
+}
