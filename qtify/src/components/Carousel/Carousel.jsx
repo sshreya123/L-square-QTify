@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Virtual } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,7 +11,8 @@ function Carousel({ data, renderItem }) {
   return (
     <div className={styles.wrapper}>
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Virtual]}
+        virtual
         spaceBetween={20}
         navigation
         breakpoints={{
@@ -21,8 +22,8 @@ function Carousel({ data, renderItem }) {
           1024: { slidesPerView: 6 },
         }}
       >
-        {data.map((item) => (
-          <SwiperSlide key={item.id}>
+        {data.map((item, index) => (
+          <SwiperSlide key={item.id} virtualIndex={index}>
             {renderItem(item)}
           </SwiperSlide>
         ))}
