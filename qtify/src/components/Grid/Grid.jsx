@@ -1,14 +1,13 @@
 import React from "react";
-import Card from "../Card/Card";
 import styles from "./Grid.module.css";
 
-function Grid({ data = [] }) {
-  if (!data || data.length === 0) return null;
-
+function Grid({ data, renderItem }) {
   return (
     <div className={styles.grid}>
-      {data.map((album) => (
-        album && <Card key={album.id} album={album} />
+      {data.map((item) => (
+        <div key={item.id}>
+          {renderItem(item)}
+        </div>
       ))}
     </div>
   );

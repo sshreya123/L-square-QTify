@@ -5,17 +5,17 @@ import Carousel from "../Carousel/Carousel";
 import Card from "../Card/Card";
 import styles from "./Section.module.css";
 
-function Section({ title, endpoint }) {
-  const [albums, setAlbums] = useState([]);
+function Section({ title, endpoint, showToggle = true, type }) {
+  const [data, setData] = useState([]);
   const [collapse, setCollapse] = useState(false);
 
   useEffect(() => {
-    const fetchAlbums = async () => {
+    const fetchData = async () => {
       const res = await axios.get(endpoint);
-      setAlbums(res.data);
+      setData(res.data);
     };
 
-    fetchAlbums();
+    fetchData();
   }, [endpoint]);
 
   return (
@@ -23,21 +23,33 @@ function Section({ title, endpoint }) {
       <div className={styles.header}>
         <h2>{title}</h2>
 
-        <button
-          className={styles.button}
-          onClick={() => setCollapse(!collapse)}
-        >
-          {collapse ? "Show All" : "Collapse"}
-        </button>
+        {showToggle && (
+          <button
+            className={styles.button}
+            onClick={() => setCollapse(!collapse)}
+          >
+            {collapse ? "Collapse" : "Show All"}
+          </button>
+        )}
       </div>
 
-      {collapse ? (
-        <Carousel
-          data={albums}
-          renderItem={(album) => <Card album={album} />}
-        />
+      {showToggle ? (
+        collapse ? (
+          <Grid
+            data={data}
+            renderItem={(item) => <Card item={item} type={type} />}
+          />
+        ) : (
+          <Carousel
+            data={data}
+            renderItem={(item) => <Card item={item} type={type} />}
+          />
+        )
       ) : (
-        <Grid data={albums} />
+        <Carousel
+          data={data}
+          renderItem={(item) => <Card item={item} type={type} />}
+        />
       )}
     </div>
   );
