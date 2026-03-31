@@ -1,31 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Grid from "../Grid/Grid";
+import Carousel from "../Carousel/Carousel";
+import Card from "../Card/Card";
 import styles from "./Section.module.css";
 
-function Section({ title }) {
+function Section({ title, endpoint }) {
   const [albums, setAlbums] = useState([]);
   const [collapse, setCollapse] = useState(false);
 
   useEffect(() => {
     const fetchAlbums = async () => {
-      try {
-        const res = await axios.get(
-          "https://qtify-backend.labs.crio.do/albums/top"
-        );
-        setAlbums(res.data);
-        console.log(albums)
-      } catch (error) {
-        console.log(error);
-      }
+      const res = await axios.get(endpoint);
+      setAlbums(res.data);
     };
 
     fetchAlbums();
-  }, []);
+  }, [endpoint]);
 
   return (
     <div className={styles.section}>
-      
       <div className={styles.header}>
         <h2>{title}</h2>
 
@@ -37,8 +31,14 @@ function Section({ title }) {
         </button>
       </div>
 
-      {!collapse && <Grid data={albums} />}
-
+      {collapse ? (
+        <Carousel
+          data={albums}
+          renderItem={(album) => <Card album={album} />}
+        />
+      ) : (
+        <Grid data={albums} />
+      )}
     </div>
   );
 }
